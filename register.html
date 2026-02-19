@@ -7,15 +7,15 @@
 </head>
 <body>
     <h2>Registro</h2>
-    <form>
-        <input type="text" placeholder="Usuario" required>
-        <input type="password" placeholder="Contraseña" required>
-        <button type="submit">Registrar</button>
+   <form action="/register" method="post">
+    <input type="text" name="Username" placeholder="Usuario" required>
+    <input type="password" name="Password" placeholder="Contraseña" required>
+    <button type="submit">Registrar</button>
+</form>
 
-    </form>
     ---Aqui hago la conexion con el login en caso de que el usuario ya tenga una cuenta---
     <p>¿Ya tienes una cuenta? <a href="login.html">Inicia sesión aquí</a></p>
-    
+
     
 </body>
 </html>
