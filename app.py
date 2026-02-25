@@ -1,4 +1,4 @@
-from flask import Flask, request
+from flask import Flask, render_template, request
 import mysql.connector
 
 app = Flask(__name__)
@@ -11,25 +11,23 @@ db = mysql.connector.connect(
     database="Proyecto_Crud"
 )
 
-##Ruta para el registro de usuarios
-
-@app.route('/register', methods=['POST'])
+## Ruta para el registro de usuarios
+@app.route('/register', methods=['GET', 'POST'])
 def register():
-    Username = request.form['username']
-    Password = request.form['password']
+    if request.method == 'POST':
+        Username = request.form['username']
+        Password = request.form['password']
+        cursor = db.cursor()
+        sql = "INSERT INTO USERS (Username, Password) VALUES (%s, %s)"
+        values = (Username, Password)
+        cursor.execute(sql, values)
+        db.commit()
+        cursor.close()
+        return "Usuario registrado con éxito"
+    return render_template('register.html')
 
-    cursor = db.cursor()
-    sql = "INSERT INTO USERS (Username, Password) VALUES (%s, %s)"
-    values = (Username, Password)
-    cursor.execute(sql, values)
-    db.commit()
-    cursor.close()
-
-    return "Usuario registrado con éxito"
-
-##Agregamos la ruta para el login
-
-@app.route('/login', methods=['POST'])
+## Ruta para el login
+@app.route('/login', methods=['GET'])
 def login():
     Username = request.form['username']
     Password = request.form['password']
@@ -46,12 +44,8 @@ def login():
     else:
         return "Usuario o contraseña incorrectos"
 
-if __name__ == '__main__':
-    app.run(debug=True)
-
-    ##Ruta de contraseña olvidada
-
-    @app.route('/forgot-password', methods=['POST'])
+## Ruta de contraseña olvidada
+@app.route('/forgot-password', methods=['GET'])
 def forgot_password():
     Username = request.form['username']
     cursor = db.cursor()
@@ -64,5 +58,10 @@ def forgot_password():
         return "Se ha enviado un enlace de recuperación de contraseña a tu correo electrónico."
     else:
         return "Usuario no encontrado."
+
+if __name__ == '__main__':
+    app.run(debug=True)
+
+
 
 
