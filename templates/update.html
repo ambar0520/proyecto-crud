@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Update</title>
+    <!-- CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <!-- JS -->
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</head>
+
+<body>
+    <h2>Actualizar contraseña</h2>
+    <form method="POST" onsubmit="return validarUpdate()">
+        <input type="text" id="username" name="username" placeholder="Usuario" required>
+        <input type="password" id="new_password" name="new_password" placeholder="Nueva contraseña" required>
+        <button type="submit">Actualizar</button>
+    </form>
+</body>
+</html>

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Eliminar usuario</title>
+    <!-- CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <!-- JS -->
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</head>
+
+<body>
+    <h2>Eliminar usuario</h2>
+<form method="POST">
+    <input type="number" name="id" placeholder="ID del usuario" required>
+    <button type="submit">Eliminar</button>
+</form>
+
+</body>
+</html>
+
